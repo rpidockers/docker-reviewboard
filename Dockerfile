@@ -1,5 +1,4 @@
-FROM debian:wheezy
-MAINTAINER igor.katson@gmail.com
+FROM sdhibit/rpi-raspbian 
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -13,8 +12,6 @@ RUN pip install -U uwsgi
 ADD start.sh /start.sh
 ADD uwsgi.ini /uwsgi.ini
 ADD shell.sh /shell.sh
-
-RUN chmod +x start.sh shell.sh
 
 VOLUME ["/.ssh", "/media/"]
 
