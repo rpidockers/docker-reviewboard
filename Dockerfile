@@ -9,12 +9,16 @@ RUN easy_install reviewboard
 
 RUN pip install -U uwsgi
 
-ADD start.sh /start.sh
+RUN apt-get install -y memcached
+RUN apt-get install -y sqlite3
+RUN apt-get install -y patch
+
+ADD run.sh /bin/
 ADD uwsgi.ini /uwsgi.ini
 ADD shell.sh /shell.sh
 
-VOLUME ["/.ssh", "/media/"]
+VOLUME ["/.ssh", "/media/", "/data"]
 
 EXPOSE 8000
 
-CMD /start.sh
+CMD /bin/run.sh
